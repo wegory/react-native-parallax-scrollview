@@ -14,6 +14,7 @@ import { Icon, List, ListItem } from 'react-native-elements';
 import { USER, FACEBOOK_LIST, SLACK_LIST, GENERIC_LIST, SCREEN_WIDTH, SCREEN_HEIGHT, DEFAULT_WINDOW_MULTIPLIER, DEFAULT_NAVBAR_HEIGHT } from './constants';
 
 import styles from './styles';
+import { moderateScale } from '../../../src/styles';
 
 const ScrollViewPropTypes = ScrollView.propTypes;
 
@@ -94,11 +95,7 @@ export default class ParallaxScrollView extends Component {
                 <View
                   style={styles.avatarView}
                 >
-                {(typeof userImage === "string" || userImage instanceof String) ?
-                <Image source={{uri:userImage || USER.image}} style={{height: 120, width: 120, borderRadius: 60}} />
-                :
-                  <Image source={userImage || USER.image} style={{height: 120, width: 120, borderRadius: 60}} />
-                }
+                  <Image source={{uri: userImage || USER.image}} style={{height: 120, width: 120, borderRadius: 60}} />
                 </View>
                 <View style={{paddingVertical: 10}}>
                   <Text style={{textAlign: 'center', fontSize: 22, color: 'white', paddingBottom: 5}}>{userName || USER.name}</Text>
@@ -129,7 +126,7 @@ export default class ParallaxScrollView extends Component {
         }}
       >
         {navBarTitleComponent ||
-        <Text style={{ fontSize: 18, fontWeight: '600', color: navBarTitleColor || 'white' }}>
+        <Text style={{ fontSize: moderateScale(15), fontFamily: "Bold", color: navBarTitleColor || 'white' }}>
           {this.props.navBarTitle || USER.name}
         </Text>}
       </Animated.View>
@@ -175,11 +172,11 @@ export default class ParallaxScrollView extends Component {
               height: newNavBarHeight,
               width: SCREEN_WIDTH,
               flexDirection: 'row',
-              backgroundColor: scrollY.interpolate({
-                inputRange: [-windowHeight, windowHeight * DEFAULT_WINDOW_MULTIPLIER, windowHeight * 0.8],
-                outputRange: ['transparent', 'transparent', navBarColor || 'rgba(0, 0, 0, 1.0)'],
-                extrapolate: 'clamp'
-              })
+              backgroundColor: navBarColor
+              // scrollY.interpolate({
+              //   inputRange: [-windowHeight, windowHeight * 0.8],
+              //   outputRange: ['transparent',  navBarColor || 'rgba(0, 0, 0, 1.0)']
+              // })
             }}
           >
           {leftIcon &&
@@ -233,61 +230,13 @@ export default class ParallaxScrollView extends Component {
     }
   }
 
-  renderTodoListContent() {
-    return (
-      <View style={styles.listView}>
-        <List>
-        {
-          FACEBOOK_LIST.map((item, index) => (
-            <ListItem
-              key={index}
-              onPress={() => console.log('List item pressed')}
-              title={item.title}
-              leftIcon={{name: item.icon}} />
-          ))
-        }
-        </List>
-        <List>
-        {
-          SLACK_LIST.map((item, index) => (
-            <ListItem
-              key={index}
-              onPress={() => console.log('List item pressed')}
-              title={item.title}
-              leftIcon={{name: item.icon}} />
-          ))
-        }
-        </List>
-        <List>
-        {
-          GENERIC_LIST.map((item, index) => (
-            <ListItem
-              key={index}
-              onPress={() => console.log('List item pressed')}
-              title={item.title}
-              leftIcon={{name: item.icon}} />
-          ))
-        }
-        </List>
-        <List containerStyle={{marginBottom: 15}}>
-          <ListItem
-            key={1}
-            hideChevron={true}
-            onPress={() => console.log('Logout Pressed')}
-            title='LOGOUT'
-            titleStyle={styles.logoutText}
-            icon={{name: ''}} />
-        </List>
-      </View>
-    );
-  }
 
   render() {
     const { style, ...props } = this.props;
 
     return (
       <View style={[styles.container, style]}>
-        {this.renderBackground()}
+        {/* {this.renderBackground()} */}
         {this.rendernavBar()}
         <ScrollView
           ref={component => {
