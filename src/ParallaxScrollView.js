@@ -6,7 +6,8 @@ import {
   View,
   Image,
   Animated,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 
 import { Icon, List, ListItem } from 'react-native-elements';
@@ -184,12 +185,14 @@ export default class ParallaxScrollView extends Component {
             }}
           >
           {leftIcon &&
-            <View
+            <TouchableOpacity
               style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center'
               }}
+              hitSlop={{top: moderateScale(20), left: moderateScale(20), right: moderateScale(20), bottom: moderateScale(20)}}
+              onPress={leftIconOnPress}
             >
               <Icon
                 name={leftIcon && leftIcon.name || 'menu'}
@@ -199,12 +202,13 @@ export default class ParallaxScrollView extends Component {
                 onPress={leftIconOnPress}
                 underlayColor={leftIconUnderlayColor || 'transparent'}
               />
-            </View>
+            </TouchableOpacity>
           }
             <View
               style={{
                 flex: 5,
                 paddingTop: moderateScale(25),
+                paddingBottom: moderateScale(10),
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignSelf: 'center'
