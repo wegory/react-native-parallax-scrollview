@@ -153,6 +153,8 @@ export default class ParallaxScrollView extends Component {
               height: newNavBarHeight,
               width: SCREEN_WIDTH,
               flexDirection: 'row',
+              justifyContent: "center",
+              alignItems: "center",
               backgroundColor: scrollY.interpolate({
                 inputRange: [-windowHeight, windowHeight * DEFAULT_WINDOW_MULTIPLIER, windowHeight * 0.8],
                 outputRange: ['transparent', 'transparent', navBarColor || 'rgba(0, 0, 0, 1.0)'],
@@ -172,6 +174,8 @@ export default class ParallaxScrollView extends Component {
               height: newNavBarHeight,
               width: SCREEN_WIDTH,
               flexDirection: 'row',
+              justifyContent: "center",
+              alignItems: "center",
               backgroundColor: navBarColor
               // scrollY.interpolate({
               //   inputRange: [-windowHeight, windowHeight * 0.8],
@@ -200,6 +204,7 @@ export default class ParallaxScrollView extends Component {
             <View
               style={{
                 flex: 5,
+                paddingTop: moderateScale(25),
                 justifyContent: 'center',
                 alignItems: 'center',
                 alignSelf: 'center'
